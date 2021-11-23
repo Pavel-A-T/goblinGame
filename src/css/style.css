@@ -1,0 +1,38 @@
+body {
+  margin:0;
+  padding:0;
+}
+#game-container {
+  overflow:hidden;
+  width:430px;
+  position: absolute;
+  margin: 0 auto;
+  left: 600px;
+  top: 100px;
+
+}
+.box {
+  width:100px;
+  height:100px;
+  float:left;
+  background-color: deepskyblue;
+  margin-bottom:10px;
+}
+
+.spacing {
+  margin-right:10px;
+}
+#goblin {
+  width: 100px;
+  height: 100px;
+}
+
+.hide {
+  display: none;
+}
+.goblin {
+  margin:0;
+  padding:0;
+  width: 100px;
+  height: 100px;
+}
