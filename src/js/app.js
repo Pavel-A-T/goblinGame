@@ -9,7 +9,6 @@ export default class App {
   }
 
   getRandomGoblin() {
-    if (this.faul === 5) clearInterval(this.timerInterval);
     if (!this.box) this.box = document.getElementsByClassName('box');
     this.random = this.getRandom();
     for (const element of this.box) {
@@ -20,6 +19,7 @@ export default class App {
           this.prevElement.removeChild(this.goblin);
         }
         this.goblin.classList.remove('hide');
+        if (this.faul === 5) clearInterval(this.timerInterval);
         element.appendChild(this.goblin);
         this.prevElement = element;
         return;
