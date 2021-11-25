@@ -1,30 +1,26 @@
-import GameController from "./gameController";
+import GoblinController from './goblinController';
 
 export default class App {
   constructor() {
     this.score = 0;
-    this.r = document.getElementsByClassName('box');
-    for (let i of this.r) {
-      i.addEventListener("goblinClick", (event) => {
-        event.preventDefault();
-        this.score += 1;
-        console.log(this.score)
-      });
-    }
+    this.faul = 0;
+    this.goblin = document.getElementById('goblin');
     this.calculateRandom = () => Math.floor(Math.random() * 16);
   }
 
   getRandomGoblin() {
-    if (!this.goblin) this.goblin = document.getElementById('goblin');
+    if (this.faul === 5) clearInterval(this.timerInterval);
     if (!this.box) this.box = document.getElementsByClassName('box');
     this.random = this.getRandom();
     for (const element of this.box) {
       if (element.getAttribute('data-id') === this.random.toString()) {
-        if (this.prevElement) this.prevElement.removeChild(this.goblin);
-        else this.goblin.classList.remove('hide');
+        if (this.prevElement) {
+          if (this.goblin.classList.contains('hide')) this.score += 1;
+          else this.faul += 1;
+          this.prevElement.removeChild(this.goblin);
+        }
+        this.goblin.classList.remove('hide');
         element.appendChild(this.goblin);
-        let event = new Event("goblinClick");
-        this.goblin.dispatchEvent(event);
         this.prevElement = element;
         return;
       }
@@ -40,9 +36,11 @@ export default class App {
   }
 
   start() {
-    setInterval(() => this.getRandomGoblin(), 1000);
+    this.timerInterval = setInterval(() => this.getRandomGoblin(), 1000);
   }
 }
 
 const app = new App();
+const goblinController = new GoblinController(app.goblin);
+goblinController.goblinClick();
 app.start();
