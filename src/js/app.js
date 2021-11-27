@@ -43,17 +43,4 @@ export default class App {
   start() {
     this.timerInterval = setInterval(() => this.getRandomGoblin(), 1000);
   }
-
-  // startGame() {
-  //   const btn = document.getElementById('start');
-  //   btn.addEventListener('click', () => {
-  //     console.log("а")
-  //     const app = new App();
-  //     const goblinController = new GoblinController(this.goblin);
-  //     goblinController.goblinClick();
-  //     app.hits.innerText = 'Попаданий: 0';
-  //     app.miss.innerText = 'Промахов: 0';
-  //     app.start();
-  //   });
-  // }
 }

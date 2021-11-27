@@ -1,8 +1,9 @@
 import App from './app';
 
 export default class GoblinController {
-  constructor(goblin) {
-    this.goblin = goblin;
+  constructor(app) {
+    this.app = app;
+    this.goblin = app.goblin;
   }
 
   goblinClick() {
@@ -13,18 +14,20 @@ export default class GoblinController {
 
   startGame() {
     const btn = document.getElementById('start');
-    btn.addEventListener('click', (event) => {
+    btn.addEventListener('mousedown', (event) => {
       event.preventDefault();
-      const app = new App();
-      this.goblinClick();
-      app.hits.innerText = 'Попаданий: 0';
-      app.miss.innerText = 'Промахов: 0';
-      app.start();
+      clearInterval(this.app.timerInterval);
+      this.app.score = 0;
+      this.app.faul = 0;
+      this.app.hits.innerText = 'Попаданий: 0';
+      this.app.miss.innerText = 'Промахов: 0';
+      this.app.start();
     });
   }
 }
 
 const app = new App();
-const goblinController = new GoblinController(app.goblin);
+const goblinController = new GoblinController(app);
+goblinController.goblinClick();
 goblinController.startGame();
 app.start();
